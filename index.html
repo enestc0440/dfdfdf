@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neon CyberQuery v5.0</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=VT323&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-</head>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"> </head>
+
 <body>
     <div class="background">
         <canvas id="matrix"></canvas>
     </div>
     <div class="container">
         <h1><span class="glitch" data-text="NΣӨП CYBΣЯQUΣЯY">NΣӨП CYBΣЯQUΣЯY</span> <span class="version">v5.0</span></h1>
-        
+
         <div class="panel">
             <div class="category-grid">
                 <div class="category">
@@ -53,11 +56,11 @@
                 <div class="category">
                     <h2>🔍 Leak & Dark Web</h2>
                     <select id="leak-api-select">
-                        <option value="leakcheck_ondex">Email Leak Check (Ondex)</option>
-                        <option value="emailsorgu">Email Sorgu (Ondex)</option>
-                        <option value="numarakedi">Numara Kedi (Ondex)</option>
-                        <option value="darkweb">Dark Web Tarama (Placeholder)</option>
-                        <option value="liveshot">Live Shot (Ekran Görüntüsü)</option>
+                        <option value="leakcheck_ondex">Leak Kontrol (Ondex)</option>
+                        <option value="emailsorgu">Email Sorgu</option>
+                        <option value="numarakedi">Numara Kedi</option>
+                        <option value="darkweb">Dark Web Taraması</option>
+                        <option value="liveshot">Live Shot</option>
                     </select>
                     <div id="leak-inputs" class="input-grid"></div>
                     <button class="execute-button" onclick="executeQuery('leak')">Execute</button>
@@ -66,29 +69,29 @@
                 <div class="category">
                     <h2>🤖 Yapay Zeka</h2>
                     <select id="ai-api-select">
-                        <option value="gpt">GPT Chat (API Key Gerekli)</option>
+                        <option value="gpt">GPT</option>
                     </select>
                     <div id="ai-inputs" class="input-grid"></div>
                     <button class="execute-button" onclick="executeQuery('ai')">Execute</button>
                 </div>
 
                 <div class="category">
-                    <h2>🔧 Güvenlik Araçları</h2>
+                    <h2>🛡️ Güvenlik Araçları</h2>
                     <select id="security-api-select">
-                        <option value="hash">Hash Generator</option>
-                        <option value="discordnitrogenerator_ondex">Discord Nitro Gen (Ondex)</option>
-                        <option value="nitro_checker_local">Discord Nitro Checker (Local)</option>
-                        <option value="scraper">OTP/API Key Scraper</option>
+                        <option value="hash">Hash Oluşturucu</option>
+                        <option value="discordnitrogenerator_ondex">Discord Nitro Generator</option>
+                        <option value="nitro_checker_local">Nitro Checker (Local)</option>
+                        <option value="scraper">Scraper</option>
                     </select>
                     <div id="security-inputs" class="input-grid"></div>
                     <button class="execute-button" onclick="executeQuery('security')">Execute</button>
                 </div>
 
                 <div class="category">
-                    <h2>🛠️ Genel Araçlar</h2>
+                    <h2>⚙️ Genel Araçlar</h2>
                     <select id="general-api-select">
-                        <option value="operator">Operatör Sorgu (Ondex)</option>
-                        <option value="browser">Tarayıcı Bilgileri</option>
+                        <option value="operator">GSM Operatör Sorgu</option>
+                        <option value="browser">Tarayıcı Bilgisi</option>
                         <option value="camera">Kamera Testi</option>
                         <option value="json">JSON Görüntüleyici</option>
                         <option value="password">Şifre Oluşturucu</option>
@@ -117,4 +120,5 @@
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>
