@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon CyberQuery v5.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="background">
+        <canvas id="matrix"></canvas>
+    </div>
+    <div class="container">
+        <h1><span class="glitch" data-text="NΣӨП CYBΣЯQUΣЯY">NΣӨП CYBΣЯQUΣЯY</span> <span class="version">v5.0</span></h1>
+        
+        <div class="panel">
+            <div class="category-grid">
+                <div class="category">
+                    <h2>🔐 Kimlik & Simülasyon</h2>
+                    <select id="kimlik-api-select">
+                        <option value="tcsorgu">TC Sorgu</option>
+                        <option value="tcprosorgu">TC Pro Sorgu</option>
+                        <option value="adressorgu">Adres Sorgu</option>
+                        <option value="hanesorgu">Hane Sorgu</option>
+                        <option value="adsoyadsorgu">Ad Soyad Sorgu</option>
+                        <option value="adsoyadprosorgu">Ad Soyad Pro Sorgu</option>
+                        <option value="gsmtcprosorgu">GSM → TC Pro</option>
+                        <option value="tcgsmprosorgu">TC → GSM Pro</option>
+                        <option value="sulaleprosorgu">Sülale Pro Sorgu</option>
+                        <option value="isyeriarkadasisorgu">İşyeri Arkadaşı Sorgu</option>
+                        <option value="isyerisorgu">İşyeri Sorgu</option>
+                        <option value="isyeriyetkilisorgu">İşyeri Yetkili Sorgu</option>
+                        <option value="fakeid">Sahte Kimlik Oluşturucu</option>
+                    </select>
+                    <div id="kimlik-inputs" class="input-grid"></div>
+                    <button class="execute-button" onclick="executeQuery('kimlik')">Execute</button>
+                </div>
+
+                <div class="category">
+                    <h2>🌐 OSINT & Ağ Araçları</h2>
+                    <select id="osint-api-select">
+                        <option value="ipsorgu_ondex">IP Sorgu (Ondex)</option>
+                        <option value="ipsorgu_ipapi">IP Info & Reverse DNS (ip-api)</option>
+                        <option value="whois">WHOIS Sorgulama</option>
+                        <option value="portscanner">Port Tarama</option>
+                        <option value="metascraping">Meta Veri Tarayıcı</option>
+                    </select>
+                    <div id="osint-inputs" class="input-grid"></div>
+                    <button class="execute-button" onclick="executeQuery('osint')">Execute</button>
+                </div>
+
+                <div class="category">
+                    <h2>🔍 Leak & Dark Web</h2>
+                    <select id="leak-api-select">
+                        <option value="leakcheck_ondex">Email Leak Check (Ondex)</option>
+                        <option value="emailsorgu">Email Sorgu (Ondex)</option>
+                        <option value="numarakedi">Numara Kedi (Ondex)</option>
+                        <option value="darkweb">Dark Web Tarama (Placeholder)</option>
+                        <option value="liveshot">Live Shot (Ekran Görüntüsü)</option>
+                    </select>
+                    <div id="leak-inputs" class="input-grid"></div>
+                    <button class="execute-button" onclick="executeQuery('leak')">Execute</button>
+                </div>
+
+                <div class="category">
+                    <h2>🤖 Yapay Zeka</h2>
+                    <select id="ai-api-select">
+                        <option value="gpt">GPT Chat (API Key Gerekli)</option>
+                    </select>
+                    <div id="ai-inputs" class="input-grid"></div>
+                    <button class="execute-button" onclick="executeQuery('ai')">Execute</button>
+                </div>
+
+                <div class="category">
+                    <h2>🔧 Güvenlik Araçları</h2>
+                    <select id="security-api-select">
+                        <option value="hash">Hash Generator</option>
+                        <option value="discordnitrogenerator_ondex">Discord Nitro Gen (Ondex)</option>
+                        <option value="nitro_checker_local">Discord Nitro Checker (Local)</option>
+                        <option value="scraper">OTP/API Key Scraper</option>
+                    </select>
+                    <div id="security-inputs" class="input-grid"></div>
+                    <button class="execute-button" onclick="executeQuery('security')">Execute</button>
+                </div>
+
+                <div class="category">
+                    <h2>🛠️ Genel Araçlar</h2>
+                    <select id="general-api-select">
+                        <option value="operator">Operatör Sorgu (Ondex)</option>
+                        <option value="browser">Tarayıcı Bilgileri</option>
+                        <option value="camera">Kamera Testi</option>
+                        <option value="json">JSON Görüntüleyici</option>
+                        <option value="password">Şifre Oluşturucu</option>
+                        <option value="urlencode">URL Encoder/Decoder</option>
+                        <option value="qrcode">QR Code Oluşturucu</option>
+                    </select>
+                    <div id="general-inputs" class="input-grid"></div>
+                    <button class="execute-button" onclick="executeQuery('general')">Execute</button>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <h3>Terminal Output</h3>
+                <div class="output-controls">
+                    <input type="text" id="output-search" placeholder="Search results...">
+                    <button onclick="copyOutput()">Copy</button>
+                    <button onclick="clearOutput()">Clear</button>
+                    <button onclick="saveOutput()">Save</button>
+                </div>
+                <div id="loading" style="display: none;">Executing query... <span class="loader"></span></div>
+                <div id="video-container" style="display: none;"></div>
+                <button id="stop-camera" style="display: none;" onclick="stopCamera()">Stop Camera</button>
+                <pre id="result">Initializing Terminal...</pre>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

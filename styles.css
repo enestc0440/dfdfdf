@@ -1,0 +1,381 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #000500; /* Koyu yeşil-siyah arka plan */
+    font-family: 'VT323', monospace;
+    color: #00ff00; /* Ana metin rengi neon yeşil */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; /* Yatay kaydırmayı engelle */
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+#matrix {
+    display: block; /* Canvas'ın gereksiz boşluk bırakmasını engeller */
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    width: 95%;
+    max-width: 1400px; /* Panelin maksimum genişliği */
+    margin: 20px auto;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.85); /* Yarı saydam siyah arka plan */
+    border: 3px solid #00ff00;
+    box-shadow: 0 0 25px #00ff00, 0 0 35px #00ff00 inset, 0 0 40px rgba(0, 255, 0, 0.5);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Footer'a yer bırakmak için */
+}
+
+h1 {
+    text-align: center;
+    color: #00ff00;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.8em; /* Biraz küçülttük */
+    margin-bottom: 25px;
+    text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #ff0000;
+    position: relative;
+}
+
+.glitch {
+    position: relative;
+    animation: glitch-effect 2.5s infinite steps(1);
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85); /* Ana container arka planıyla uyumlu */
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 #ff0000; /* Kırmızı gölge */
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-effect-2 2.5s infinite steps(1) reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 #00ffff, 2px 2px #ff0000; /* Mavi ve kırmızı gölgeler */
+    animation: glitch-effect-3 2s infinite steps(1) reverse;
+}
+
+@keyframes glitch-effect {
+    0% { text-shadow: 0.05em 0 0 #00ff00, -0.025em -0.05em 0 #ff0000, -0.025em 0.05em 0 #00ffff; }
+    15% { text-shadow: 0.05em 0 0 #00ff00, -0.025em -0.05em 0 #ff0000, -0.025em 0.05em 0 #00ffff; }
+    16% { text-shadow: -0.05em -0.025em 0 #00ff00, 0.025em 0.05em 0 #ff0000, -0.05em -0.05em 0 #00ffff; }
+    /* ... daha fazla adım eklenebilir ... */
+    100% { text-shadow: -0.05em -0.025em 0 #00ff00, 0.025em 0.05em 0 #ff0000, -0.05em -0.05em 0 #00ffff; }
+}
+@keyframes glitch-effect-2 { /* Daha belirgin glitch için */
+  0%, 100% { clip-path: inset(50% 0 30% 0); transform: translateX(-3px); }
+  25% { clip-path: inset(10% 0 70% 0); transform: translateX(3px); }
+  50% { clip-path: inset(65% 0 5% 0); transform: translateY(-2px) translateX(-3px); }
+  75% { clip-path: inset(40% 0 45% 0); transform: translateY(2px) translateX(3px); }
+}
+@keyframes glitch-effect-3 { /* Daha belirgin glitch için */
+  0%, 100% { clip-path: inset(80% 0 5% 0); transform: translateX(2px); }
+  25% { clip-path: inset(20% 0 60% 0); transform: translateX(-2px); }
+  50% { clip-path: inset(55% 0 25% 0); transform: translateY(1px) translateX(2px); }
+  75% { clip-path: inset(10% 0 85% 0); transform: translateY(-1px) translateX(-2px); }
+}
+
+
+.version {
+    font-size: 0.4em;
+    color: #ff0000;
+    vertical-align: super;
+    margin-left: 5px;
+}
+
+.panel {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Kategoriler ve çıktı alanı arası boşluk */
+    overflow-y: auto; /* Gerekirse panelin kendisi scroll edebilir */
+    padding-right: 10px; /* Kaydırma çubuğu için yer */
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Esnek grid yapısı */
+    gap: 20px;
+}
+
+.category {
+    background: rgba(0, 20, 0, 0.7); /* Hafif yeşilimsi yarı saydam arka plan */
+    padding: 20px;
+    border: 1px solid #008000; /* Koyu yeşil kenarlık */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3), 0 0 15px rgba(0, 255, 0, 0.2) inset;
+    display: flex;
+    flex-direction: column;
+}
+
+.category h2 {
+    color: #ff0000; /* Kırmızı kategori başlığı */
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.4em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000;
+    border-bottom: 1px solid #ff3333;
+    padding-bottom: 10px;
+}
+
+.input-grid {
+    display: grid;
+    gap: 12px; /* Inputlar arası boşluk */
+    margin-bottom: 15px;
+}
+
+.input-grid div { /* Inputları saran div için (opsiyonel) */
+    display: flex;
+    flex-direction: column;
+}
+
+select, input[type="text"], input[type="number"], input[type="url"], input[type="email"], textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    font-family: 'VT323', monospace;
+    background-color: #001000; /* Çok koyu yeşil arka plan */
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    outline: none; /* Tıklama anındaki varsayılan çerçeveyi kaldır */
+}
+
+select:hover, input[type="text"]:hover, input[type="number"]:hover, input[type="url"]:hover, input[type="email"]:hover, textarea:hover {
+    box-shadow: 0 0 10px #00ff00, 0 0 15px #00ff00;
+    border-color: #33ff33; /* Hover'da kenarlık rengini biraz aç */
+}
+
+select:focus, input[type="text"]:focus, input[type="number"]:focus, input[type="url"]:focus, input[type="email"]:focus, textarea:focus {
+    box-shadow: 0 0 15px #00ff00, 0 0 20px #33ff33;
+    border-color: #66ff66; /* Focus'ta kenarlık rengini daha da aç */
+}
+
+input::placeholder {
+    color: #009900; /* Placeholder metin rengi */
+    opacity: 0.7;
+}
+
+button.execute-button {
+    padding: 12px 20px;
+    font-size: 1.1em;
+    font-family: 'Orbitron', sans-serif;
+    background-color: #ff0000; /* Kırmızı buton */
+    color: #000000; /* Siyah yazı */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 3px #000;
+    margin-top: auto; /* Butonu kategori içinde en alta iter */
+}
+
+button.execute-button:hover {
+    background-color: #00ff00; /* Yeşil hover */
+    color: #000000;
+    box-shadow: 0 0 15px #00ff00, 0 0 20px #00ff00;
+}
+
+.output-section {
+    background-color: rgba(0, 10, 0, 0.7); /* Çıktı alanı için hafif arka plan */
+    padding: 20px;
+    border: 1px solid #008000;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    margin-top: 20px; /* Kategorilerle arasında boşluk */
+}
+
+.output-section h3 {
+    color: #ff0000;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.6em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-shadow: 0 0 8px #ff0000;
+    border-bottom: 1px solid #ff3333;
+    padding-bottom: 10px;
+}
+
+.output-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.output-controls input[type="text"] {
+    flex-grow: 1;
+}
+
+.output-controls button {
+    padding: 8px 12px;
+    font-size: 0.9em;
+    font-family: 'Orbitron', sans-serif;
+    background-color: #00ff00;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.output-controls button:hover {
+    background-color: #ff0000;
+    box-shadow: 0 0 10px #ff0000;
+}
+
+#result {
+    height: 500px; 
+    overflow-y: auto; 
+    font-size: 1em;  
+    line-height: 1.6; 
+    padding: 15px; 
+    border: 2px solid #00ff00; 
+    border-radius: 5px; 
+    background-color: rgba(0, 20, 0, 0.85); 
+    color: #00ff00; 
+    text-shadow: 0 0 5px #00ff00, 0 0 7px rgba(0, 255, 0, 0.5); 
+    box-shadow: 0 0 15px #00ff00 inset, 0 0 10px rgba(0, 255, 0, 0.5); 
+    white-space: pre-wrap; 
+    word-break: break-all; 
+    transition: all 0.3s ease; 
+}
+
+#result.error {
+    color: #ff0000; 
+    text-shadow: 0 0 5px #ff0000, 0 0 7px rgba(255, 0, 0, 0.5); 
+    border-color: #ff0000; 
+    box-shadow: 0 0 15px #ff0000 inset, 0 0 10px rgba(255, 0, 0, 0.5); 
+}
+
+#result.success { 
+    color: #00ff00;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+#result.info { 
+    color: #00aaff; /* Bilgilendirme mesajları için mavi tonu */
+    text-shadow: 0 0 5px #00aaff;
+    border-color: #00aaff;
+    box-shadow: 0 0 15px #00aaff inset, 0 0 10px rgba(0, 170, 255, 0.5);
+}
+
+.highlight {
+    background-color: rgba(255, 255, 0, 0.7); /* Arama vurgusu için sarı */
+    color: #000;
+    padding: 1px 3px;
+    border-radius: 3px;
+}
+
+#video-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex; /* İçeriği ortalamak için */
+    justify-content: center;
+}
+
+#video-container video {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px; /* Video yüksekliğini sınırla */
+    border: 2px solid #00ff00;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+#stop-camera {
+    display: block; /* Butonu blok element yap */
+    margin: 10px auto; /* Ortala */
+    padding: 10px 15px;
+    font-family: 'Orbitron', sans-serif;
+    background-color: #ff0000;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#stop-camera:hover {
+    background-color: #cc0000;
+}
+
+
+#loading {
+    color: #ff0000;
+    font-size: 1.1em;
+    text-shadow: 0 0 8px #ff0000;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.loader {
+  border: 4px solid #f3f3f3; /* Light grey */
+  border-top: 4px solid #ff0000; /* Red */
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-message-input { /* Input alanında hata mesajı için */
+    color: #ff0000;
+    font-size: 0.9em;
+    margin-top: 5px;
+    text-shadow: 0 0 3px #ff0000;
+}
+
+/* Kaydırma Çubuğu Stilleri (Webkit tabanlı tarayıcılar için) */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #001000;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #00ff00;
+    border-radius: 10px;
+    border: 2px solid #001000; /* Thumb etrafında track renginde çerçeve */
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #ff0000;
+}
+
+/* Firefox için kaydırma çubuğu stilleri (daha sınırlı) */
+body { /* Veya scroll olan ana container */
+    scrollbar-width: thin;
+    scrollbar-color: #00ff00 #001000; /* thumb ve track rengi */
+}
